@@ -24,7 +24,7 @@ class Case:
 class Grille:
     """Une grille est une matrice 9x9 de cases. Elle est initialisée avec des cases vides."""
     def __init__(self):
-        self.grille = [[Case() for i in range(9)] for j in range(9)]    # matrice 9x9 de cases
+        self.grille = [[Case() for i in range(3)] for j in range(3)]    # matrice 3x3 de cases
 
 
     def affichage(self):
@@ -68,4 +68,15 @@ class Jeu:
 
 
 
+    def jouer(self):
+        """Fait jouer les joueurs à tour de rôle."""
+        while not self.grille.pleine():
+            self.grille.affichage()
+            print('Au tour du joueur', self.joueurCourant.getNumero())
+            i, j = self.joueurCourant.jouer()
+            self.grille.set(i, j, self.joueurCourant.getNumero())
+            if self.gagne():
+                print('Le joueur', self.joueurCourant.getNumero(), 'a gagné !')
+                break
+            self.joueurCourant = self.joueur0 if self.joueurCourant == self.joueur1 else self.joueur1   # changement de joueur  
        
