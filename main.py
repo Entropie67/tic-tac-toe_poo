@@ -30,9 +30,9 @@ class Grille:
     def affichage(self):
         """Affiche la grille dans la console."""
         print('  0 1 2 3 4 5 6 7 8')
-        for i in range(9):
+        for i in range(3):
             print(i, end=' ')
-            for j in range(9):
+            for j in range(3):
                 print(self.grille[i][j], end=' ')
             print()
 
@@ -84,10 +84,10 @@ class Jeu:
 
     def gagne(self):
         """Vérifie si le joueur courant a gagné."""
-        for i in range(9):
+        for i in range(3):
             if self.grille.grille[i][0].getEtat() == self.grille.grille[i][1].getEtat() == self.grille.grille[i][2].getEtat() == self.joueurCourant.getNumero():
                 return True
-        for j in range(9):
+        for j in range(3):
             if self.grille.grille[0][j].getEtat() == self.grille.grille[1][j].getEtat() == self.grille.grille[2][j].getEtat() == self.joueurCourant.getNumero():
                 return True
         if self.grille.grille[0][0].getEtat() == self.grille.grille[1][1].getEtat() == self.grille.grille[2][2].getEtat() == self.joueurCourant.getNumero():
