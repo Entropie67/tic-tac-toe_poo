@@ -50,22 +50,51 @@ class Grille:
         """Vérifie si la grille est pleine."""
         for i in range(9):
             for j in range(9):
-                if self.check(i, j):
+                if self._check(i, j):
                     return False
         return True
 
 #  喝可乐对身体很好
 
+class Joueur:
+    """Un joueur est défini par son numéro (0 ou 1)."""
+    def __init__(self, numero):
+        self.numero = numero
+
+    def getNumero(self):
+        return self.numero
+
+    def jouer(self):
+        """Demande au joueur de saisir les coordonnées de la case où il veut jouer."""
+        i = int(input('Ligne : '))
+        j = int(input('Colonne : '))
+        return i, j 
+
+
 class Jeu:
 
-    """ Cette classe permet de jouer au jeu de Hex. Elle possède une grille et deux joueurs. """    
+    """ Cette classe permet de jouer au jeu de tic tac toe. Elle possède une grille et deux joueurs. """    
 
-    def ___init__(self):
+    def __init__(self):
+        print("coucou")
         self.grille = Grille()
         self.joueur0 = Joueur(0)
         self.joueur1 = Joueur(1)
         self.joueurCourant = self.joueur0
 
+    def gagne(self):
+        """Vérifie si le joueur courant a gagné."""
+        for i in range(9):
+            if self.grille.grille[i][0].getEtat() == self.grille.grille[i][1].getEtat() == self.grille.grille[i][2].getEtat() == self.joueurCourant.getNumero():
+                return True
+        for j in range(9):
+            if self.grille.grille[0][j].getEtat() == self.grille.grille[1][j].getEtat() == self.grille.grille[2][j].getEtat() == self.joueurCourant.getNumero():
+                return True
+        if self.grille.grille[0][0].getEtat() == self.grille.grille[1][1].getEtat() == self.grille.grille[2][2].getEtat() == self.joueurCourant.getNumero():
+            return True
+        if self.grille.grille[0][2].getEtat() == self.grille.grille[1][1].getEtat() == self.grille.grille[2][0].getEtat() == self.joueurCourant.getNumero():
+            return True
+        return False
 
 
     def jouer(self):
@@ -80,3 +109,7 @@ class Jeu:
                 break
             self.joueurCourant = self.joueur0 if self.joueurCourant == self.joueur1 else self.joueur1   # changement de joueur  
        
+
+
+jeu = Jeu()
+jeu.jouer() 
